@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../assets/CSS/main.css">
+    <link rel="stylesheet" href="../assets/CSS/grid.css">
+    <link rel="stylesheet" href="../assets/CSS/base.css">
+    <link rel="stylesheet" href="../assets/CSS/responsive.css">
+    <link rel="stylesheet" href="../Assets/Bootstrap/css/bootstrap.min.css">
+
+    <title>Đổi mật khẩu</title>
+</head>
+
+<body>
+
+<header>
+    <div class="w-100">
+        <div class="header-allProduct">
+
+            <img src="../Assets/IMG/breadcrumb.jpg"
+                 alt=""
+                 class="header-allProduct-img">
+
+            <div class="radient">
+
+                <div class="header-gioiThieu-block">
+
+                    <h3>Đổi mật khẩu</h3>
+
+                    <ul>
+                        <li>
+                            <a href="/">Trang chủ</a>
+                        </li>
+
+                        <li>/</li>
+
+                        <li>Đổi mật khẩu</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<content>
+
+    <div class="container">
+
+        <div class="Login-list"
+             style="max-width:500px;
+                    margin:40px auto;">
+
+            <!-- HEADER -->
+            <div class="Register__header">
+
+                <a href="/login"
+                   class="Register-LoginNav">
+                    Đăng Nhập
+                </a>
+
+                <a href="/doi-mat-khau"
+                   class="Register-RegisterNav active">
+                    Đổi mật khẩu
+                </a>
+
+            </div>
+
+            <!-- FORM -->
+            <form action="/changePassword" method="post">
+
+                <!-- BƯỚC 1 -->
+                <div id="step1">
+
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           class="Register-input"
+                           placeholder="Nhập Email"
+                           required>
+
+                    <button type="button"
+                            class="Register-RegisterBtn"
+                            onclick="sendOTP()">
+                        Gửi OTP
+                    </button>
+
+                </div>
+
+                <!-- BƯỚC 2 -->
+                <div id="step2" style="display:none;">
+
+                    <input type="text"
+                           id="otp"
+                           name="otp"
+                           class="Register-input"
+                           placeholder="Nhập OTP">
+
+                    <button type="button"
+                            class="Register-RegisterBtn"
+                            onclick="verifyOTP()">
+                        Xác nhận OTP
+                    </button>
+
+                </div>
+
+                <!-- BƯỚC 3 -->
+                <div id="step3" style="display:none;">
+
+                    <input type="password"
+                           name="newPassword"
+                           class="Register-input"
+                           placeholder="Mật khẩu mới">
+
+                    <input type="password"
+                           name="rePassword"
+                           class="Register-input"
+                           placeholder="Nhập lại mật khẩu">
+
+                    <button type="submit"
+                            class="Register-RegisterBtn">
+                        Đổi mật khẩu
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</content>
+
+
+<script src="../Assets/JS/main.js"></script>
+<script>
+
+    function sendOTP() {
+
+        const email =
+            document.getElementById("email").value;
+
+        if(email === "") {
+
+            alert("Vui lòng nhập email");
+
+            return;
+        }
+
+        fetch("/sendOTP", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body: "email=" + encodeURIComponent(email)
+
+        })
+
+        .then(response => response.text())
+
+        .then(data => {
+
+           if(data === "success"){
+               alert("OTP đã được gửi!");
+               document.getElementById("step1").style.display = "none";
+               document.getElementById("step2").style.display = "block";
+
+           }
+           else if(data === "email_not_found"){
+               alert("Email không tồn tại trong hệ thống!");
+           }
+            else{
+                alert("Có lỗi xảy ra!");
+            }
+        });
+    }
+
+    function verifyOTP() {
+
+        const otp =
+            document.getElementById("otp").value;
+
+        if(otp === "") {
+
+            alert("Vui lòng nhập OTP");
+
+            return;
+        }
+
+        fetch("/verify-otp", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body: "otp=" + encodeURIComponent(otp)
+
+        })
+
+        .then(response => response.text())
+
+        .then(data => {
+
+            if(data === "success") {
+
+                alert("Xác thực OTP thành công!");
+
+                document.getElementById("step2").style.display = "none";
+
+                document.getElementById("step3").style.display = "block";
+            }
+            else {
+
+                alert("OTP không đúng!");
+            }
+
+        });
+
+    }
+
+</script>
+</body>
+</html>
+
