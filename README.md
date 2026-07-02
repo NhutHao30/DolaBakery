@@ -43,26 +43,6 @@ Dola Bakery là một hệ thống ứng dụng web thương mại điện tử 
 - **Quản lý Nhân sự nội bộ:** Admin có quyền cấp tài khoản nội bộ cho nhân viên với mật khẩu mặc định được mã hóa tự động.
 
 
-📂 Cấu Trúc Thư Mục
-
-Dự án được phân tách làm 2 phần rõ rệt theo chuẩn RESTful:
-
-📦 WEBSITE QUAN LY CUA HANG BANH NGOT
- ┣ 📂 DolaBakery_BackEnd    # Source code Java Spring Boot (RESTful API Server)
- ┃ ┣ 📂 src/main/java/.../models      # Entities / Models (Định nghĩa bảng CSDL)
- ┃ ┣ 📂 src/main/java/.../repository  # Các Interface kế thừa JpaRepository (Thao tác DB)
- ┃ ┣ 📂 src/main/java/.../service     # Xử lý Logic nghiệp vụ cốt lõi (Email, OTP...)
- ┃ ┗ 📂 src/main/java/.../controller  # Các Controllers tiếp nhận HTTP Request & trả về JSON
- ┣ 📂 DolaBakery_FontEnd    # Source code ReactJS (Giao diện người dùng)
- ┃ ┣ 📂 src/Layout        # Các Component khung (Header, Footer, AdminLayout bảo mật)
- ┃ ┣ 📂 src/Pages         # Các giao diện chức năng độc lập (Home, Cart, Dashboard,...)
- ┃ ┗ 📂 src/services      # Thư mục xử lý gọi API giao tiếp với Backend
- ┣ 📂 BaoCao                # Các báo cáo, sơ đồ UML, báo cáo tiến độ
- ┣ 📜 DESIGN.md             # Đặc tả Design System của dự án
- ┣ 📜 tech_details.md       # Giải thích chi tiết về thuật toán và công nghệ bảo mật
- ┗ 📜 README.md             # Tài liệu tổng quan (file hiện tại)
-
-
 ## 🛡 Điểm Nhấn Kiến Trúc & Bảo Mật (Dành cho Đánh giá Kỹ thuật)
 
 Dự án chú trọng rất nhiều vào bảo mật và tính toàn vẹn dữ liệu:
