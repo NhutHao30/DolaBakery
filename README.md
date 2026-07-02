@@ -43,7 +43,7 @@ Dola Bakery là một hệ thống ứng dụng web thương mại điện tử 
 - **Quản lý Nhân sự nội bộ:** Admin có quyền cấp tài khoản nội bộ cho nhân viên với mật khẩu mặc định được mã hóa tự động.
 
 
-## 🛡 Điểm Nhấn Kiến Trúc & Bảo Mật (Dành cho Đánh giá Kỹ thuật)
+## 🛡 Điểm Nhấn Kiến Trúc & Bảo Mật
 
 Dự án chú trọng rất nhiều vào bảo mật và tính toàn vẹn dữ liệu:
 1. **Mã hóa mật khẩu 1 chiều (BCrypt):** Tránh hoàn toàn việc lộ mật khẩu, kể cả khi database bị tấn công. Việc thêm ngẫu nhiên "Salt" khiến các cuộc tấn công bằng Rainbow Table hoặc Dictionary Attack trở nên vô hiệu.
